@@ -1,4 +1,0 @@
-- Add more tools over time via `python -m src.cli add`
-- Consider adding per-tool metadata (pricing, OSS/commercial, IDEs supported)
-- Add CI to validate YAML and regenerate docs on PRs
-- Add FastMCP endpoints for catalog queries
