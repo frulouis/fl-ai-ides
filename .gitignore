@@ -19,4 +19,9 @@ node_modules/
 configs/
 data/
 
+# Exclude local tooling and generated docs
+.specstory/
+.cursor/
+docs/
+
 

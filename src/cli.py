@@ -2,11 +2,10 @@
 CLI for AI IDEs & Coding Agents catalog.
 - list: show catalog entries
 - add: append a new entry to YAML
-- generate: create docs/AI_IDEs.md from YAML
+- generate: inject the list into README only
 """
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 from typing import Optional
 
@@ -22,9 +21,8 @@ console = Console()
 # Default paths
 ROOT = Path(__file__).resolve().parents[1]
 CONFIGS = ROOT / "configs"
-DOCS = ROOT / "docs"
 CATALOG = CONFIGS / "ai_ides.yaml"
-OUTPUT_MD = DOCS / "AI_IDEs.md"
+README = ROOT / "README.md"
 
 
 def load_catalog(path: Path = CATALOG) -> dict:
@@ -88,10 +86,8 @@ def add(
     typer.secho(f"Added: {name}", fg=typer.colors.GREEN)
 
 
-DOC_TEMPLATE = Template(
+README_SECTION_TEMPLATE = Template(
     """
-# AI IDEs and AI Coding Agents
-
 {% for item in items -%}
 {{ loop.index }}. [{{ item.name }}]({{ item.url }}){% if item.category %} — {{ item.category }}{% endif %}{% if item.notes %} — {{ item.notes }}{% endif %}
 {% endfor %}
@@ -101,15 +97,26 @@ DOC_TEMPLATE = Template(
 
 @app.command()
 def generate() -> None:
-    """Generate docs/AI_IDEs.md from YAML catalog."""
+    """Inject the list into README between markers only."""
     data = load_catalog()
     items = data.get("items", [])
 
-    # Pass dictionaries directly; Jinja2 allows attribute-like access to dict keys
-    OUTPUT_MD.parent.mkdir(parents=True, exist_ok=True)
-    rendered = DOC_TEMPLATE.render(items=items)
-    OUTPUT_MD.write_text(rendered + "\n", encoding="utf-8")
-    typer.secho(f"Generated: {OUTPUT_MD}", fg=typer.colors.GREEN)
+    if not README.exists():
+        typer.secho("README.md not found; cannot inject", fg=typer.colors.RED)
+        raise typer.Exit(code=1)
+
+    content = README.read_text(encoding="utf-8")
+    start = "<!-- BEGIN: AI_IDE_LIST -->"
+    end = "<!-- END: AI_IDE_LIST -->"
+    if start in content and end in content and content.index(start) < content.index(end):
+        pre = content.split(start)[0]
+        post = content.split(end)[1]
+        section = README_SECTION_TEMPLATE.render(items=items)
+        new_content = f"{pre}{start}\n{section}\n{end}{post}"
+        README.write_text(new_content, encoding="utf-8")
+        typer.secho("Injected list into README.md", fg=typer.colors.GREEN)
+    else:
+        typer.secho("Markers not found in README; no changes made", fg=typer.colors.YELLOW)
 
 
 if __name__ == "__main__":
