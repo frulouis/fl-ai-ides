@@ -1,13 +1,8 @@
-# AI IDEs & Coding Agents Tracker
+# Fru Dev - AI IDEs
 
-A public, extensible catalog to track AI IDEs and AI coding agents with hyperlinks, categories, and notes.
-
-## Features
-- Simple YAML catalog in `configs/ai_ides.yaml`
-- CLI to list, add, and update the README section
+Curated list of AI IDEs and AI coding agents. Focused on practical tools for building, refactoring, testing, and shipping software.
 
 ## AI IDEs and AI Coding Agents
-<!-- BEGIN: AI_IDE_LIST -->
 1. [Emergen.ch](https://emergen.ch) — AI IDE
 2. [Code Rabbit](https://coderabbit.ai) — Code Review / Assistant
 3. [Factory.ai](https://factory.ai) — AI IDE
@@ -51,37 +46,17 @@ A public, extensible catalog to track AI IDEs and AI coding agents with hyperlin
 41. [Jules from Google](https://jules.google) — Assistant
 42. [Claude Code](https://github.com/anthropics/claude-code) — Agent / Terminal
 
-<!-- END: AI_IDE_LIST -->
+## Recommend a tool
+- Open an issue: [Suggest a new AI IDE/agent](https://github.com/frulouis/fl-ai-ides/issues/new)
+- Or open a PR editing this `README.md` with:
+  - name, official URL, one-liner description, and a short category (e.g., AI IDE, Assistant, Plugin, No-Code)
 
-## Project Structure
-- `assets/` static assets
-- `configs/` configuration and the main catalog YAML
-- `data/` datasets or exports (excluded from git)
-- `src/` Python source (CLI and utilities)
-  - `tests/` basic tests
-  - `utilities/` helpers
-  - `pipelines/` reserved for future automations
-  - `mcp/` reserved for FastMCP integrations
-
-## Quickstart (uv)
-```bash
-# Create and activate venv
-uv venv
-source .venv/bin/activate
-
-# Install deps
-uv pip install -r requirements.txt
-
-# Use CLI
-python -m src.cli list
-python -m src.cli generate
-python -m src.cli add --name "YourTool" --url "https://example.com" --category "AI IDE" --notes "Optional"
-```
-
-## Contributing
-- Edit `configs/ai_ides.yaml` or use the CLI `add` command
-- Keep entries minimal: name, url, optional category and notes
-- Run `python -m src.cli generate` to refresh the README section
+## Curation notes
+- Links point to official product pages when possible; avoid unofficial mirrors.
+- Scope: tools that help you build, refactor, test, review, or ship code.
+- Categories are intentionally lightweight and may evolve.
+- This list is vendor-neutral and non-sponsored.
+- I periodically refine descriptions for clarity and usefulness.
 
 ## License
 MIT — see `LICENSE`.
