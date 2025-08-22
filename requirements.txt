@@ -1,0 +1,4 @@
+PyYAML>=6.0,<7
+Typer[all]>=0.12,<1
+rich>=13,<14
+Jinja2>=3,<4

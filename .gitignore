@@ -1,0 +1,22 @@
+__pycache__/
+.pytest_cache/
+.venv/
+venv/
+.DS_Store
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+*.log
+dist/
+build/
+*.egg-info/
+uv.lock
+node_modules/
+
+# Exclude sensitive and heavy folders
+configs/
+data/
+
+

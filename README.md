@@ -1,0 +1,42 @@
+# AI IDEs & Coding Agents Tracker
+
+A public, extensible catalog to track AI IDEs and AI coding agents with hyperlinks, categories, and notes.
+
+## Features
+- Simple YAML catalog in `configs/ai_ides.yaml`
+- CLI to list, add, and generate docs
+- Auto-generated markdown in `docs/AI_IDEs.md`
+
+## Project Structure
+- `assets/` static assets
+- `configs/` configuration and the main catalog YAML
+- `data/` datasets or exports (excluded from git)
+- `docs/` generated documentation
+- `src/` Python source (CLI and utilities)
+  - `tests/` basic tests
+  - `utilities/` helpers
+  - `pipelines/` reserved for future automations
+  - `mcp/` reserved for FastMCP integrations
+
+## Quickstart (uv)
+```bash
+# Create and activate venv
+uv venv
+source .venv/bin/activate
+
+# Install deps
+uv pip install -r requirements.txt
+
+# Use CLI
+python -m src.cli list
+python -m src.cli generate
+python -m src.cli add --name "YourTool" --url "https://example.com" --category "AI IDE" --notes "Optional"
+```
+
+## Contributing
+- Edit `configs/ai_ides.yaml` or use the CLI `add` command
+- Keep entries minimal: name, url, optional category and notes
+- Run `python -m src.cli generate` to refresh `docs/AI_IDEs.md`
+
+## License
+MIT — see `LICENSE`.
